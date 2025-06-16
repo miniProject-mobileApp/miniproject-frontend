@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/pages/introductoryPages/page_one.dart';
-import 'package:frontend/pages/introductoryPages/page_three.dart';
-import 'package:frontend/pages/introductoryPages/page_two.dart';
-import 'package:frontend/screens/onboardingScreen.dart';
-// import 'package:frontend/pages/introductoryPages/page_one.dart';
+import 'package:frontend/screens/loginPage.dart';
+// import 'package:frontend/screens/onboardingScreen.dart';
 
 void main(){
   runApp(const MyApp());
@@ -18,7 +15,8 @@ class MyApp extends StatelessWidget{
     // TODO: implement build
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: OnboardingScreen()
+      theme: ThemeData(primaryColor: Colors.blue),
+      home: LoginScreen()
     );
   }
 }
