@@ -8,9 +8,10 @@ class OnboardingScreen extends StatelessWidget{
     print("Onboarding complete");
   }
 
-
   @override
   Widget build(BuildContext context) {
+
+    final screenHeight = MediaQuery.of(context).size.height;
     
     // default page decorations for onboarding screens
     const pageDecoration = PageDecoration(
@@ -23,20 +24,30 @@ class OnboardingScreen extends StatelessWidget{
         fontSize: 16,
         color: Colors.blue
       ),
-      bodyPadding: EdgeInsets.symmetric(horizontal: 16),
-      imagePadding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-      contentMargin: EdgeInsets.all(16)
+      bodyPadding: EdgeInsets.zero,
+      imagePadding: EdgeInsets.zero,
+      imageFlex: 2, // gives the image two times more vertical space
+      bodyFlex: 1,
+      contentMargin: EdgeInsets.all(10)
     );
 
+  
     return IntroductionScreen(
       key: const Key('onboarding_screen'),
       pages: [
         PageViewModel(
           title: "Learn about finance",
           body: "Fintech offers simple lessons to help you better understand and manage your finances",
-          image: Image.asset(
-            'assets/images/intro_page_one.png',
-            fit: BoxFit.cover,
+          image: Container(
+            margin: EdgeInsets.only(
+              top: screenHeight * 0.15,
+              left: 16,
+              right: 16
+            ),
+            child: Image.asset(
+              'assets/images/intro_page_one.png',
+              fit: BoxFit.cover,
+            ),
           ),
           decoration: pageDecoration
         ),
@@ -46,7 +57,14 @@ class OnboardingScreen extends StatelessWidget{
         PageViewModel(
           title: "Stay up to date",
           body: "With our news feature, stay up to date on all news trends",
-          image: Image.asset("assets/images/intro_page_two.png", fit: BoxFit.cover),
+          image: Container(
+            margin: EdgeInsets.only(
+              top: screenHeight * 0.15,
+              left: 16,
+              right: 16
+            ),
+            child: Image.asset("assets/images/intro_page_two.png", fit: BoxFit.cover),
+          ),
           decoration: pageDecoration
         ),
 
@@ -54,7 +72,19 @@ class OnboardingScreen extends StatelessWidget{
         PageViewModel(
           title: "Stay up to date",
           body: "With our news feature, stay up to date on all news trends",
-          image: Image.asset("assets/images/intro_page_three.png", fit: BoxFit.cover),
+          image: Container(
+            margin: EdgeInsets.only(
+              top: screenHeight * 0.15,
+              left: 20, 
+              right: 20
+            ),
+            child: Image.asset(
+              "assets/images/intro_page_three.png", 
+              fit: BoxFit.cover,
+              width: 300,
+              height: 300,
+              ),
+          ),
           decoration: pageDecoration,
           footer: Column(
             children: [
@@ -70,7 +100,7 @@ class OnboardingScreen extends StatelessWidget{
                     borderRadius: BorderRadius.circular(12)
                   ),
                   elevation: 0,
-                  minimumSize: const Size(double.infinity, 65),
+                  minimumSize: const Size(200, 65),
                 ),
                 child: const Text("Create an account", style: TextStyle(fontSize: 16),)),
                 const SizedBox(height: 16,),
@@ -87,7 +117,7 @@ class OnboardingScreen extends StatelessWidget{
                       side: const BorderSide(color: Colors.blue, width: 1)
                     ),
                     elevation: 0,
-                    minimumSize: const Size(double.infinity, 65)
+                    minimumSize: const Size(200, 65)
                   ),
                   child: const Text("I already have an account", style: TextStyle(fontSize: 16),)
                 )
@@ -98,8 +128,8 @@ class OnboardingScreen extends StatelessWidget{
       onDone: () => _onIntroEnd(context),
       showSkipButton: true,
       showNextButton: true,
-      skip: const Text("Skip", style: TextStyle(color: Colors.blue)),
-      next: const Icon(Icons.arrow_forward, color: Colors.blue),
+      skip: const Text("Skip", style: TextStyle(color: Colors.blue, fontSize: 16)),
+      next: const Icon(Icons.arrow_forward, color: Colors.blue, size: 30,),
       done: const Text("Done", style: TextStyle(color: Colors.blue)),
       dotsDecorator: const DotsDecorator(
         size: Size(10, 10),
@@ -114,3 +144,4 @@ class OnboardingScreen extends StatelessWidget{
     );
   }
 }
+
