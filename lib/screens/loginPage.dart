@@ -44,16 +44,30 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(30),
+                        // back arrow
                         child: GestureDetector(
                           onTap: () {
                             Navigator.push(
                               context, 
-                              MaterialPageRoute(builder: (context) => OnboardingScreen())
+                              PageRouteBuilder(
+                                pageBuilder: (context, animation, secondaryAnimation) => OnboardingScreen(),
+                                transitionsBuilder: (context, animation, secondaryAnimation, child){
+                                  const begin = Offset(-1, 0);
+                                  const end = Offset.zero;
+                                  const curve = Curves.easeInOut;
+
+                                  var tween = Tween(begin: begin,end: end).chain(CurveTween(curve: curve));
+                                  var offSetAnimation = animation.drive(tween);
+
+                                  return SlideTransition(position: offSetAnimation, child: child);
+                                },
+                                transitionDuration: Duration(milliseconds: 500)
+                              )        
                             );
                           } ,
                           child: Icon(
                             Icons.arrow_back,
-                            size: 30,
+                            size: 30,   
                             color: Colors.white
                           ),
                         ),
@@ -249,7 +263,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Sign in with Google",
+                          "Login in with Google",
                           style: TextStyle(color: Colors.blue, fontSize: 14),
                         ),
                         Padding(
