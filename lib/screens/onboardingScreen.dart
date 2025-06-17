@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/loginPage.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 class OnboardingScreen extends StatelessWidget{
@@ -106,8 +107,10 @@ class OnboardingScreen extends StatelessWidget{
                 const SizedBox(height: 16,),
                 ElevatedButton(
                   onPressed: () {
-                    //login logic
-                    print("logged in");
+                    Navigator.push(
+                      context, 
+                      MaterialPageRoute(builder: (context) => LoginScreen())
+                    );
                   }, 
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
