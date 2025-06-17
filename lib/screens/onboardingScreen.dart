@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/loginPage.dart';
+import 'package:frontend/screens/signUpPage.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 class OnboardingScreen extends StatelessWidget{
@@ -92,7 +93,23 @@ class OnboardingScreen extends StatelessWidget{
               ElevatedButton(
                 onPressed: () {
                   //navigation for creating account
-                  print("Create an account");
+                  Navigator.push(
+                    context, 
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) => signUpScreen(),
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        const begin = Offset(1, 0);
+                        const end = Offset.zero;
+                        const curve = Curves.easeInOut;
+
+                        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                        var offSetAnimation = animation.drive(tween);
+
+                        return SlideTransition(position: offSetAnimation, child: child);
+                      }, 
+                      transitionDuration: Duration(milliseconds: 500)
+                    )
+                  );
                 }, 
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
@@ -109,7 +126,23 @@ class OnboardingScreen extends StatelessWidget{
                   onPressed: () {
                     Navigator.push(
                       context, 
-                      MaterialPageRoute(builder: (context) => LoginScreen())
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) => LoginScreen(),
+                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                          const begin = Offset(1, 0); // start the new screen from the right
+                          const end = Offset.zero;
+                          const curve = Curves.easeInOut;
+
+                          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                          var offSetAnimation = animation.drive(tween);
+
+                          return SlideTransition(
+                            position: offSetAnimation,
+                            child: child,
+                          );
+                        },
+                        transitionDuration: Duration(milliseconds: 500)
+                      )
                     );
                   }, 
                   style: ElevatedButton.styleFrom(
