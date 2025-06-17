@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/loginPage.dart';
-// import 'package:frontend/screens/onboardingScreen.dart';
+import 'package:frontend/screens/onboardingScreen.dart';
 
 void main(){
   runApp(const MyApp());
@@ -16,7 +15,7 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primaryColor: Colors.blue),
-      home: LoginScreen()
+      home: OnboardingScreen()
     );
   }
 }
