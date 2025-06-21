@@ -12,8 +12,6 @@ class HomeScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    // final screenHeight = MediaQuery.of(context).size.height;
-    // final screenWidth = MediaQuery.of(context).size.width;
     // TODO: implement build
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(statusBarColor: Colors.blue[100]),
@@ -64,6 +62,35 @@ class HomeScreen extends StatelessWidget{
                       ),
                     )
                   ],
+                ),
+
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(width: 1, color: Colors.blue),
+                      color: Colors.blue
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Track your expense"),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                          child: Container(
+                            width: 30,
+                            height: 30,
+                            decoration: BoxDecoration(
+                              border: Border.all(width: 1, color: Colors.grey),
+                              shape: BoxShape.circle,
+                              color: Colors.white
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
 
                 //amount section
@@ -164,12 +191,13 @@ class HomeScreen extends StatelessWidget{
                                       height: 40,
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
-                                        border: Border.all(color: Colors.white, width: 1)
+                                        border: Border.all(color: Colors.blue, width: 1),
+                                        color: Colors.white
                                       ),
-                                      child: FaIcon(FontAwesomeIcons.book, size: 20,),
+                                      child: Center(child: Image.asset('assets/images/book.png', width: 20, height: 20,)),
                                     ),
                                     Text("Continue lesson"),
-                                    Text("Don't miss your streak"),
+                                    Text("Maintain your streak 🔥", style: TextStyle(color: Colors.grey[500]),),
                                   ],
                                 ),
                               ),
@@ -182,6 +210,27 @@ class HomeScreen extends StatelessWidget{
                                 color: const Color.fromARGB(255, 225, 237, 247),
                                 borderRadius: BorderRadius.circular(16),
                                 border: Border.all(color: Colors.blue)
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: 40,
+                                      height: 49,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(color: Colors.blue, width: 1),
+                                        color: Colors.white
+                                      ),
+                                      child: Center(child: Image.asset("assets/images/controller.png", width: 20, height: 20,),),
+                                    ),
+                                    Text("Play games"),
+                                    Text("Fun study games", style: TextStyle(color: Colors.grey[500]),)
+                                  ],
+                                ),
                               ),
                             ),
                           ],
@@ -196,8 +245,30 @@ class HomeScreen extends StatelessWidget{
                                 borderRadius: BorderRadius.circular(16),
                                 border: Border.all(color: Colors.blue)
                               ),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(color: Colors.blue, width: 1),
+                                        color: Colors.white
+                                      ),
+                                      child: Center(child: Image.asset('assets/images/trending.png', width: 20, height: 20,),),
+                                    ),
+                                    Text("See what is trending"),
+                                    Text("Top stories now",style: TextStyle(color: Colors.grey[500]),)
+                                  ],
+                                ),
+                              ),
                             ),
                             SizedBox(height: 10),
+                            // feedback section
                             Container(
                               width: 180,
                               height: 150,
@@ -205,6 +276,27 @@ class HomeScreen extends StatelessWidget{
                                 color: const Color.fromARGB(255, 225, 237, 247),
                                 borderRadius: BorderRadius.circular(16),
                                 border: Border.all(color: Colors.blue)
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: 40,
+                                      height: 40,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.white,
+                                        border: Border.all(color: Colors.blue, width: 1)
+                                      ),
+                                      child: Center(child: Image.asset('assets/images/feedback.png', width: 20, height: 20,),),
+                                    ),
+                                    Text("Provide Feedback",),
+                                    Text("Help us grow", style: TextStyle(color: Colors.grey[500])),
+                                  ],
+                                ),
                               ),
                             ),
                           ],
