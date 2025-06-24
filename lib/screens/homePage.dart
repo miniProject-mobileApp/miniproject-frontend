@@ -75,9 +75,12 @@ class HomeScreen extends StatelessWidget{
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Track your expense"),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                          padding: const EdgeInsets.symmetric(horizontal: 16,),
+                          child: Text("Track your expense"),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                           child: Container(
                             width: 30,
                             height: 30,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/basePage.dart';
 import 'package:frontend/screens/homePage.dart';
+import 'package:frontend/screens/lessonPage.dart';
 // import 'package:frontend/screens/onboardingScreen.dart';
 
 void main(){
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primaryColor: Colors.blue),
-      home: HomeScreen()
+      home: BaseScreen()
     );
   }
 }
