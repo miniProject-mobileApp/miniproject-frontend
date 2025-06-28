@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/loginPage.dart';
-import 'package:frontend/screens/signUpPage.dart';
+import 'package:frontend/screens/oldLoginPage.dart';
+import 'package:frontend/screens/oldSignUpPage.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 class OnboardingScreen extends StatelessWidget{
