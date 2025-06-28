@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:frontend/screens/basePage.dart';
 import 'package:frontend/screens/onboardingScreen.dart';
 
 
@@ -198,6 +199,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: ElevatedButton(
                     onPressed: () {
                       //logic for pressing login
+                      Navigator.push(
+                        context, 
+                        MaterialPageRoute(builder: (context) => BaseScreen())
+                      );
                     }, 
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
