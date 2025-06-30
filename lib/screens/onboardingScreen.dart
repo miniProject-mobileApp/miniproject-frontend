@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/oldLoginPage.dart';
-import 'package:frontend/screens/oldSignUpPage.dart';
+import 'package:frontend/screens/signUpPage.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 
 class OnboardingScreen extends StatelessWidget{
@@ -96,7 +96,7 @@ class OnboardingScreen extends StatelessWidget{
                   Navigator.push(
                     context, 
                     PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => signUpScreen(),
+                      pageBuilder: (context, animation, secondaryAnimation) => SignUpScreen(),
                       transitionsBuilder: (context, animation, secondaryAnimation, child) {
                         const begin = Offset(1, 0);
                         const end = Offset.zero;

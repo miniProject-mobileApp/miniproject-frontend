@@ -32,22 +32,30 @@ class _BaseScreenState extends State<BaseScreen> {
     // TODO: implement build
     return Scaffold(
       body: _screens[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "home"),
-          BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.personChalkboard), label: "Lessons"),
-          BottomNavigationBarItem(icon: Icon(Icons.public), label: "News"),
-          BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: "Stats"),
-          BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.circleUser), label: "Profile"),
-        ]),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(color: Colors.blue, width: 1)
+          )
+        ),
+        child: BottomNavigationBar(
+          
+          currentIndex: _currentIndex,
+          onTap: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          selectedItemColor: Colors.blue,
+          unselectedItemColor: Colors.grey,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "home"),
+            BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.personChalkboard), label: "Lessons"),
+            BottomNavigationBarItem(icon: Icon(Icons.public), label: "News"),
+            BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: "Stats"),
+            BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.circleUser), label: "Profile"),
+          ]),
+      ),
     );
   }
 }
