@@ -41,7 +41,7 @@ class OngoingCourse extends StatelessWidget{
                   height: 150,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    border: BoxBorder.all(width: 1, color: Colors.blue),
+                    border: BoxBorder.all(width: 1, color: Colors.grey),
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
@@ -61,8 +61,12 @@ class OngoingCourse extends StatelessWidget{
                         height: 80,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          border: Border.all(width: 1, color: Colors.grey)
+                          border: Border.all(width: 1, color: Colors.transparent)
                         ), 
+                        child: ClipRRect(
+                          borderRadius: BorderRadiusGeometry.circular(20), 
+                          child: Image.asset('assets/images/crypto.jpeg', fit: BoxFit.cover,),
+                        ),
                       ),
                       // descriptions (consisting of topic, tutor and progress)
                       Column(
@@ -138,7 +142,11 @@ class OngoingCourse extends StatelessWidget{
                         height: 80,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          border: Border.all(width: 1, color: Colors.grey)
+                          border: Border.all(width: 1, color: Colors.transparent)
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadiusGeometry.circular(20),
+                          child: Image.asset('assets/images/forex.jpeg', fit: BoxFit.cover),
                         ),
                       ),
                 
@@ -218,6 +226,11 @@ class OngoingCourse extends StatelessWidget{
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(width: 1, color: Colors.grey)
                         ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadiusGeometry.circular(20),
+                          child: Image.asset('assets/images/blockChain.jpeg', fit: BoxFit.cover, )
+                        ),
+                        
                       ),
                 
                       // descriptions (consisting of topic, tutor and progress)
