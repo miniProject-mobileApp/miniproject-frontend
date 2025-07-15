@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
-import 'package:frontend/screens/basePage.dart';
+import 'package:frontend/screens/home/basePage.dart';
 import 'package:frontend/screens/onboardingScreen.dart';
+import 'package:frontend/screens/auth/signUpPage.dart';
 
 
 class LoginScreen extends StatefulWidget{
@@ -51,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.push(
                               context, 
                               PageRouteBuilder(
-                                pageBuilder: (context, animation, secondaryAnimation) => OnboardingScreen(),
+                                pageBuilder: (context, animation, secondaryAnimation) => SignUpScreen(),
                                 transitionsBuilder: (context, animation, secondaryAnimation, child){
                                   const begin = Offset(-1, 0);
                                   const end = Offset.zero;
