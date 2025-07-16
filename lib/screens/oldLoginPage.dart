@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend/screens/home/basePage.dart';
-import 'package:frontend/screens/onboardingScreen.dart';
+// import 'package:frontend/screens/onboardingScreen.dart';
 import 'package:frontend/screens/auth/signUpPage.dart';
 
 
