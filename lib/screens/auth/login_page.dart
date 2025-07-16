@@ -136,23 +136,29 @@ class _LoginPageState extends State<LoginPage> {
                   child: SizedBox(
                     width: screenWidth * 0.9,
                     height: 50,
-                    child: TextField(
-                      controller: _emailController,
-                      cursorColor: Colors.blue,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(35),
-                          borderSide: BorderSide(color: Colors.grey)
+                    child: TextSelectionTheme(
+                      data: TextSelectionThemeData(
+                        selectionColor: Colors.blue.withValues(alpha: 0.4),
+                        selectionHandleColor: Colors.blue
+                      ),
+                      child: TextField(
+                        controller: _emailController,
+                        cursorColor: Colors.blue,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(35),
+                            borderSide: BorderSide(color: Colors.grey)
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(35),
+                            borderSide: BorderSide(color: Colors.blue)
+                          ),
+                          labelText: "email",
+                          labelStyle: TextStyle(color: Colors.grey),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                          suffixIcon: Icon(Icons.email_outlined),
+                          suffixIconColor: Colors.blue
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(35),
-                          borderSide: BorderSide(color: Colors.blue)
-                        ),
-                        labelText: "email",
-                        labelStyle: TextStyle(color: Colors.grey),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                        suffixIcon: Icon(Icons.email_outlined),
-                        suffixIconColor: Colors.blue
                       ),
                     ),
                   ),
@@ -164,34 +170,41 @@ class _LoginPageState extends State<LoginPage> {
                   child: SizedBox(
                     width: screenWidth * 0.9,
                     height: 50,
-                    child: TextField(
-                      controller: _passwordController,
-                      cursorColor: Colors.blue,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(35),
-                          borderSide: BorderSide(color: Colors.grey)
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(35),
-                          borderSide: BorderSide(color: Colors.blue)
-                        ),
-                        labelText: "password",
-                        labelStyle: TextStyle(color: Colors.grey),
-                        contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                        suffixIcon: IconButton(
-                          onPressed: (){
-                            setState(() {
-                              isPasswordVisible = !isPasswordVisible;
-                            });
-                          }, 
-                          icon: Icon(
-                            isPasswordVisible ? Icons.visibility_off : Icons.visibility
-                          )
-                        ),
-                        suffixIconColor: Colors.blue,
+                    child: TextSelectionTheme(
+                      data: TextSelectionThemeData(
+                        selectionColor: Colors.blue.withValues(alpha: 0.4),
+                        selectionHandleColor: Colors.blue
                       ),
-                      obscureText: !isPasswordVisible,
+                      child: TextField(
+                        controller: _passwordController,
+                        cursorColor: Colors.blue,
+                        
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(35),
+                            borderSide: BorderSide(color: Colors.grey)
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(35),
+                            borderSide: BorderSide(color: Colors.blue)
+                          ),
+                          labelText: "password",
+                          labelStyle: TextStyle(color: Colors.grey),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                          suffixIcon: IconButton(
+                            onPressed: (){
+                              setState(() {
+                                isPasswordVisible = !isPasswordVisible;
+                              });
+                            }, 
+                            icon: Icon(
+                              isPasswordVisible ? Icons.visibility_off : Icons.visibility
+                            )
+                          ),
+                          suffixIconColor: Colors.blue,
+                        ),
+                        obscureText: !isPasswordVisible,
+                      ),
                     ),
                   ),
                 ),
