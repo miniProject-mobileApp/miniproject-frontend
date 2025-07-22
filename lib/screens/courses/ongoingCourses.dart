@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/courseDetails/blockChain.dart';
-import 'package:frontend/screens/courseDetails/crypto.dart';
+import 'package:frontend/screens/courseDetails/Investment/Investment_intro.dart';
 import 'package:frontend/screens/courseDetails/forex.dart';
 
 class OngoingCourse extends StatelessWidget{
