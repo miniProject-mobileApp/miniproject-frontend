@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/home/basePage.dart';
 
-import 'package:frontend/screens/individualLessons/tradingBasics.dart';
+// import 'package:frontend/screens/individualLessons/tradingBasics.dart';
 
 
 void main(){
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primaryColor: Colors.blue),
-      home: TradingBasicsScreen()
+      home: BaseScreen()
     );
   }
 }
