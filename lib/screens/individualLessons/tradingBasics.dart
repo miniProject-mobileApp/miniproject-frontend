@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:frontend/screens/quiz/investment/question_one.dart';
 import 'package:video_player/video_player.dart';
 
 class TradingBasicsScreen extends StatefulWidget{
@@ -145,8 +146,8 @@ class _TradingBasicsScreenState extends State<TradingBasicsScreen> {
                                 onPressed: _toggleAudioMute, 
                                 icon: FaIcon(
                                   _isMuted 
-                                  ? FontAwesomeIcons.volumeHigh
-                                  : FontAwesomeIcons.volumeMute, 
+                                  ? FontAwesomeIcons.volumeMute
+                                  : FontAwesomeIcons.volumeHigh, 
                                   color: Colors.blue,)
                               ),
 
@@ -238,7 +239,10 @@ class _TradingBasicsScreenState extends State<TradingBasicsScreen> {
                                   foregroundColor: Colors.white
                                 ),
                                 onPressed: (){
-                                  print("quiz attempt");
+                                  Navigator.push(
+                                    context, 
+                                    MaterialPageRoute(builder: (context) => InvestMentQuizQuestionOne() )
+                                  );
                                 }, 
                                 child: Text("Attempt quiz")
                               ),
