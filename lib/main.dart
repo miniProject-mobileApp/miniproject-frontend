@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/home/basePage.dart';
+import 'package:frontend/screens/quiz/investment/results.dart';
 
 // import 'package:frontend/screens/individualLessons/tradingBasics.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primaryColor: Colors.blue),
-      home: BaseScreen()
+      home: InvestmentQuizResultScreen()
     );
   }
 }
