@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/quiz/investment/question_two.dart';
+import 'package:frontend/screens/quiz/investment/results.dart';
+import 'package:http/http.dart' as http;
 
 class InvestMentQuizQuestionOne extends StatefulWidget{
   const InvestMentQuizQuestionOne({super.key});
@@ -9,13 +11,76 @@ class InvestMentQuizQuestionOne extends StatefulWidget{
 }
 
 class _InvestMentQuizQuestionOneState extends State<InvestMentQuizQuestionOne> {
-  int? _selectedIndex;
+  List <dynamic> questions = []; // Stores fetched questions from backend
+  int currentQuestionIndex = 0; // Tracks current question
+  int? _selectedIndex; // Tracks selected option
+  List <int?> selectedAnswers = []; // stores answers
+
+  @override
+  void initState(){
+    super.initState();
+    fetchQuestions();
+  }
+
+  Future <void> fetchQuestions() async {
+    try {
+      final response = await http.get(Uri.parse('http://192.168.186.69:7000/api/v1/quiz/start?topic=Investment'));
+      if(response.statusCode == 200){
+        final data = jsonDecode(response.body);
+        setState(() {
+          questions = data['questions'];
+          selectedAnswers = List <int?>.filled(questions.length, null);
+        });
+      }else {
+        // handle errors when questions is not successfully retrieved
+        print('Failed to retrieve questions ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching questions, $e');
+    }
+  }
+
+  void goToNextQuestion() {
+    if(_selectedIndex != null){
+      setState(() {
+        selectedAnswers[currentQuestionIndex] = _selectedIndex;
+        if(currentQuestionIndex < questions.length - 1 ){
+          currentQuestionIndex++;
+          _selectedIndex = selectedAnswers[currentQuestionIndex];
+        }else {
+          Navigator.push(
+            context, 
+            MaterialPageRoute(builder: (context) => InvestmentQuizResultScreen()) // needs to be completed
+          );
+        }
+      });
+    }
+  }
+
+  void goToPreviousQuestion() {
+    setState(() {
+      selectedAnswers[currentQuestionIndex] = _selectedIndex;
+      currentQuestionIndex--;
+      _selectedIndex = selectedAnswers[currentQuestionIndex];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
 
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
+    if(questions.isEmpty){
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    final currentQuestion = questions[currentQuestionIndex];
+    final options = currentQuestion['options'] as Map<String, dynamic>;
+
+
     // TODO: implement build
       return Scaffold(
         backgroundColor: Colors.blue,
@@ -37,7 +102,7 @@ class _InvestMentQuizQuestionOneState extends State<InvestMentQuizQuestionOne> {
                           border: Border.all(width: 1, color: Colors.white),
                           borderRadius: BorderRadius.circular(35)
                         ),
-                        child: Center(child: Text("1", style: TextStyle(fontSize: 20, color: Colors.white),))
+                        child: Center(child: Text("${currentQuestionIndex + 1}", style: TextStyle(fontSize: 20, color: Colors.white),))
                       ),
                       SizedBox(height: 10,),
                       Text("10:24",style: TextStyle(color: Colors.white),),
@@ -60,7 +125,10 @@ class _InvestMentQuizQuestionOneState extends State<InvestMentQuizQuestionOne> {
                     children: [
                       SizedBox(height: 40,),
                       //Question
-                      Text("what is investment", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                      Text(
+                        currentQuestion['question'], 
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
                       SizedBox(height: 20,),
                       // alternatives
                       Row(
@@ -68,21 +136,15 @@ class _InvestMentQuizQuestionOneState extends State<InvestMentQuizQuestionOne> {
                           Expanded(
                             child: Column( 
                               children: List.generate(4, (index) {
-                                // Defining option labels
-                                const options = [
-                                  // Define option labels
-                                  'A. This is the right option',
-                                  'B. This is the right option',
-                                  'C. This is the right option',
-                                  'D. This is the right option',
-                                ];
+                                final optionKey = ['A', 'B', 'C', 'D'][index];
+                                final optionText = options[optionKey];
                                 return Padding(
                                   padding: const EdgeInsets.only(bottom: 35),
                                   child: Row(
                                     children: [
                                       SizedBox(
                                         width: screenWidth * 0.7,
-                                        child: Text(options[index]),
+                                        child: Text('$optionKey. $optionText'),
                                       ),
                                       const SizedBox(width: 30,),
                                       InkWell(
@@ -124,42 +186,64 @@ class _InvestMentQuizQuestionOneState extends State<InvestMentQuizQuestionOne> {
                       ),  
 
                       const SizedBox(height: 50,),
-                      Container(
+                      SizedBox(
                         width: screenWidth * 0.9,
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 1, color: Colors.grey)
-                        ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                onTap: _selectedIndex != null 
-                                  ? () {
-                                      Future.delayed(Duration(milliseconds: 200), () {
-                                         Navigator.push(
-                                          context, 
-                                          MaterialPageRoute(builder: (context) => InvestMentQuizQuestionTwo())
-                                        );
-                                      });
-                                    }
-                                  : null,
-                                splashColor: const Color.fromARGB(255, 159, 206, 245),
-                                borderRadius: BorderRadius.circular(15),
-                                child: Ink(
-                                  padding: const EdgeInsets.all(8),
-                                  decoration: BoxDecoration(color: Colors.transparent),
-                                  child: Row(
+                            if(currentQuestionIndex > 0)
+                              Material(
+                                      color: Colors.transparent,
+                                      child: InkWell(
+                                        onTap: (){
+                                          Future.delayed(Duration(milliseconds: 200), () {
+                                            goToPreviousQuestion();
+                                          });
+                                        },
+                                        splashColor: const Color.fromARGB(255, 159, 206, 245),
+                                        borderRadius: BorderRadius.circular(15),
+                                        child: Ink(
+                                          padding: const EdgeInsets.all(8.0),
+                                          decoration: BoxDecoration(color: Colors.transparent),
+                                          child: Row(
                                             children: [
-                                              Text('Next', style: TextStyle(fontSize: 16),),
+                                              Icon(Icons.arrow_back_ios_outlined, size: 16,),
                                               SizedBox(width: 10,),
-                                              Icon(Icons.arrow_forward_ios, size: 16,)
+                                              Text('Previous', style: TextStyle(fontSize: 16),),
+                                              
                                             ],
                                           ),
+                                        ),
+                                      ),
+                                    )
+                              
+                            else 
+                              const SizedBox(width: 18),
+                            Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  onTap: _selectedIndex != null 
+                                    ? () {
+                                        Future.delayed(Duration(milliseconds: 200), () {
+                                          goToNextQuestion();
+                                        });
+                                      }
+                                    : null,
+                                  splashColor: const Color.fromARGB(255, 159, 206, 245),
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: Ink(
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(color: Colors.transparent),
+                                    child: Row(
+                                              children: [
+                                                Text('Next', style: TextStyle(fontSize: 16),),
+                                                SizedBox(width: 10,),
+                                                Icon(Icons.arrow_forward_ios, size: 16,)
+                                              ],
+                                            ),
+                                  ),
                                 ),
                               ),
-                            )
                           ],
                         ),
                       )                    
