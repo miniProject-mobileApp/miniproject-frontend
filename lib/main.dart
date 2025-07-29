@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/home/basePage.dart';
+// import 'package:frontend/screens/home/basePage.dart';
 import 'package:frontend/screens/quiz/investment/question_one.dart';
-import 'package:frontend/screens/quiz/investment/results.dart';
+// import 'package:frontend/screens/quiz/investment/results.dart';
 
 // import 'package:frontend/screens/individualLessons/tradingBasics.dart';
 
