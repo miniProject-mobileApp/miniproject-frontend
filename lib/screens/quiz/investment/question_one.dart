@@ -34,9 +34,61 @@ class _InvestMentQuizQuestionOneState extends State<InvestMentQuizQuestionOne> {
       }else {
         // handle errors when questions is not successfully retrieved
         print('Failed to retrieve questions ${response.statusCode}');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Failed to load quiz question"))
+        );
       }
     } catch (e) {
       print('Error fetching questions, $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Error loading quiz questions"))
+      );
+    }
+  }
+
+  Future<Map<String, dynamic>> submitQuiz() async {
+    try {
+      final answers = questions.asMap().entries.map((entry) {
+        int index = entry.key;
+        dynamic question = entry.value;
+        return {
+          'questionId': question['_id'],
+          'selectedOptions': selectedAnswers[index] != null ? ['A', 'B', 'C', 'D'] [selectedAnswers[index]!] : null
+        };
+      }).where((answer) => answer['selectedOptions'] != null).toList();
+
+      final response = await http.post(
+        Uri.parse('http://192.168.186.69:7000/api/v1/quiz/submit'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'topic': 'Investment',
+          'answers': answers
+        })
+      );
+
+      if(response.statusCode == 200){
+        final data = jsonDecode(response.body);
+        return {
+          'score': data['score'], 
+          'totalQuestions': questions.length
+        };
+      }else {
+        print('Failed to submit quiz: ${response.statusCode}');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Failed to submit quiz"))
+        );
+        return {
+          'score': 0, 
+          'totalQuestions': questions.length
+        };
+      }
+
+    } catch (e) {
+      print('Error submitting quiz $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Error submitting quiz"))
+      );
+      return {'score': 0, 'totalQuestions': questions.length};
     }
   }
 
@@ -48,12 +100,26 @@ class _InvestMentQuizQuestionOneState extends State<InvestMentQuizQuestionOne> {
           currentQuestionIndex++;
           _selectedIndex = selectedAnswers[currentQuestionIndex];
         }else {
-          Navigator.push(
+          submitQuiz().then((result) {
+            Navigator.push(
             context, 
-            MaterialPageRoute(builder: (context) => InvestmentQuizResultScreen()) // needs to be completed
-          );
+            MaterialPageRoute(
+              builder: (context) => InvestmentQuizResultScreen(
+                questions: questions,
+                selectedAnswers: selectedAnswers,
+                score: result['score'],
+                totalQuestions: result['totalQuestions']
+              )
+            )
+            );
+          });
+          
         }
       });
+    }else {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Please select an answer"))
+      );
     }
   }
 
