@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/screens/home/homePage.dart';
 import 'package:frontend/screens/home/lessonPage.dart';
-import 'package:frontend/screens/home/newsPage.dart';
+import 'package:frontend/screens/home/chatBot.dart';
 import 'package:frontend/screens/home/profilePage.dart';
 import 'package:frontend/screens/home/statsPage.dart';
 
@@ -20,7 +20,7 @@ class _BaseScreenState extends State<BaseScreen> {
   final List<Widget> _screens = [
     HomeScreen(),
     LessonScreen(),
-    NewsScreen(),
+    Chatbot(),
     StatsScreen(),
     ProfileScreen()
   ];
@@ -51,7 +51,7 @@ class _BaseScreenState extends State<BaseScreen> {
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "home"),
             BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.personChalkboard), label: "Lessons"),
-            BottomNavigationBarItem(icon: Icon(Icons.public), label: "News"),
+            BottomNavigationBarItem(icon: Icon(Icons.message), label: "Chat"),
             BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: "Stats"),
             BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.circleUser), label: "Profile"),
           ]),
