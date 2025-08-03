@@ -3,10 +3,12 @@ import 'dart:async';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/home/basePage.dart';
+import 'package:gpt_markdown/gpt_markdown.dart';
 import 'package:http/http.dart' as http;
 
 class Chatbot extends StatefulWidget{
-  const Chatbot({super.key});
+  final String? initialPrompt;
+  const Chatbot({super.key, this.initialPrompt}); // receives initial prompt
 
   @override
   State<Chatbot> createState() => _ChatbotState();
@@ -20,6 +22,16 @@ class _ChatbotState extends State<Chatbot> {
   String? errorMessage;
   String _partialResponse = '';
   Timer? _responseTimer; // dart:async needs to be imported to use Timer
+
+  @override
+  void initState() {
+    super.initState();
+    if(widget.initialPrompt != null && widget.initialPrompt!.isNotEmpty){
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        sendMessage(widget.initialPrompt!);
+      });
+    }
+  }
 
   @override
   void dispose() {
@@ -106,6 +118,7 @@ class _ChatbotState extends State<Chatbot> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(
@@ -199,15 +212,23 @@ class _ChatbotState extends State<Chatbot> {
                         alignment: isUser ? Alignment.centerRight: Alignment.centerLeft,
                         child: Container(
                           margin: EdgeInsets.symmetric(vertical: 4),
+                          width: screenWidth *0.8,
                           padding: EdgeInsets.all(12),
                           decoration: BoxDecoration(
                             color: isUser ? Colors.blue.shade100 : Colors.grey.shade300,
                             borderRadius: BorderRadius.circular(12)
                           ),
-                          child: Text(
-                            message['content']!, // need to provide comment
-                            style: TextStyle(fontSize: 16, color: isUser ? Colors.blue.shade900 : Colors.black),
-                          ),
+                          child: isUser ? Text(
+                                    message['content']!, // need to provide comment
+                                    style: TextStyle(fontSize: 16, color: Colors.blue.shade900 ),
+                                  )
+                                : GptMarkdown(
+                                  message['content']!,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black
+                                  ),
+                                ),
                         ),
                       );
                     }
