@@ -13,7 +13,7 @@ class OngoingCourse extends StatelessWidget{
     double screenWidth = MediaQuery.of(context).size.width;
     // TODO: implement build
     return Scaffold(
-      backgroundColor: Colors.blueGrey[100],
+      backgroundColor: Colors.grey.shade200,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -26,7 +26,7 @@ class OngoingCourse extends StatelessWidget{
               borderRadius: BorderRadius.circular(20),
               child: InkWell(
                 onTap: (){
-                  Future.delayed(const Duration(milliseconds: 300), () { // delays the navigation to show the ripple effect
+                  Future.delayed(const Duration(milliseconds: 200), () { // delays the navigation to show the ripple effect
                     Navigator.push(
                     context, 
                     MaterialPageRoute(builder: (context) => CryptoScreen())
@@ -41,7 +41,7 @@ class OngoingCourse extends StatelessWidget{
                   height: 150,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    border: BoxBorder.all(width: 1, color: Colors.grey),
+                    border: BoxBorder.all(width: 1, color: Colors.transparent),
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
@@ -73,7 +73,7 @@ class OngoingCourse extends StatelessWidget{
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Introduction to crypto currency"),
+                          Text("Introduction to Investing"),
                           SizedBox(height: 5,),
                           Row(
                             children: [
@@ -116,7 +116,7 @@ class OngoingCourse extends StatelessWidget{
               borderRadius: BorderRadius.circular(20),
               child: InkWell(
                 onTap: () {
-                  Future.delayed(const Duration(milliseconds: 300), () {
+                  Future.delayed(const Duration(milliseconds: 200), () {
                     Navigator.push(
                       context, 
                       MaterialPageRoute(builder: (context) => ForexScreen())
@@ -130,7 +130,7 @@ class OngoingCourse extends StatelessWidget{
                   height: 150,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    border: BoxBorder.all(width: 1, color: Colors.blue),
+                    border: BoxBorder.all(width: 1, color: Colors.transparent),
                     borderRadius: BorderRadius.circular(20)
                   ),
                   child: Row(
@@ -198,7 +198,7 @@ class OngoingCourse extends StatelessWidget{
               color: Colors.blue.shade100,
               child: InkWell(
                 onTap: (){
-                  Future.delayed(const Duration(milliseconds: 300), (){
+                  Future.delayed(const Duration(milliseconds: 200), (){
                     Navigator.push(
                       context, 
                       MaterialPageRoute(builder: (context) => BlockchainScreen())
@@ -212,7 +212,7 @@ class OngoingCourse extends StatelessWidget{
                   height: 150,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    border: BoxBorder.all(width: 1, color: Colors.blue),
+                    border: BoxBorder.all(width: 1, color: Colors.transparent),
                     borderRadius: BorderRadius.circular(20)
                   ),
                   child: Row(
@@ -224,7 +224,7 @@ class OngoingCourse extends StatelessWidget{
                         height: 80,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          border: Border.all(width: 1, color: Colors.grey)
+                          border: Border.all(width: 1, color: Colors.transparent)
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadiusGeometry.circular(20),
