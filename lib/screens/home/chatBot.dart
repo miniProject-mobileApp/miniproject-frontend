@@ -127,7 +127,7 @@ class _ChatbotState extends State<Chatbot> {
         backgroundColor: Colors.blue,
         leading: Builder(
           builder: (BuildContext context) {
-            // the Icon button for the drawer is wrapped with Builder
+            // the Icn button for the drawer is wrapped with Builder
             // it ensures that Scaffold.of(context) can find the ancestor Scaffold and call openDrawer
             return IconButton(
               icon: Icon(Icons.menu),
