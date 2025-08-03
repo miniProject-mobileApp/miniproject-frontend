@@ -45,6 +45,8 @@ dependencies:
   video_player: ^2.10.0
   percent_indicator: ^4.2.5
   flutter_spinkit: ^5.2.1
+  markdown: ^7.3.0
+  gpt_markdown: ^1.1.2
 
 
 dev_dependencies:
