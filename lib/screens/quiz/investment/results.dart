@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:frontend/screens/home/chatBot.dart';
 import 'package:percent_indicator/flutter_percent_indicator.dart';
 import 'package:http/http.dart' as http;
 
@@ -319,6 +320,31 @@ class _InvestmentQuizResultScreenState extends State<InvestmentQuizResultScreen>
                                 "Correct answer: $correctAnswer${correctAnswer != 'Unknown' ? ': ${question['options']?[correctAnswer] ?? 'N/A'}' : ''}",
                               ),
                             ),
+                            ListTile(
+                              title: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.blue.shade300,
+                                  foregroundColor: Colors.white
+                                ),
+                                onPressed: () {
+                                  final prompt = "Why  is ${question['options']? [correctAnswer] ?? correctAnswer} the answer to \"${question['question'] ?? 'No question text'}\"?";
+                                  Navigator.push(
+                                    context, 
+                                    MaterialPageRoute(builder: (context) => Chatbot(initialPrompt: prompt)),
+                                  );
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 8),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Text("Ask AI"),
+                                      Icon(Icons.question_answer_rounded)
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )
                           ]
                         )
                       )
