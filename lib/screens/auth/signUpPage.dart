@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend/screens/auth/login_page.dart';
 import 'package:frontend/screens/home/basePage.dart';
+import 'package:frontend/screens/oldLoginPage.dart';
 // import 'package:frontend/screens/oldLoginPage.dart';
 import 'package:frontend/services/sign_up_service.dart';
 
@@ -112,7 +113,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         if(mounted){
           Navigator.pushReplacement(
             context, 
-            MaterialPageRoute(builder: (context) => const BaseScreen())
+            MaterialPageRoute(builder: (context) => const LoginPage())
           );
         }
       } catch (e) {
