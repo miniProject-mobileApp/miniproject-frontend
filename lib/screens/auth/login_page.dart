@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:frontend/screens/auth/forgot_password/forgot_password_page.dart';
 import 'package:frontend/screens/auth/signUpPage.dart';
 import 'package:frontend/screens/home/basePage.dart';
 // import 'package:frontend/screens/oldLoginPage.dart';
@@ -218,7 +219,10 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          print("Forgot password page");
+                          Navigator.push(
+                            context, 
+                            MaterialPageRoute(builder: (context) => ForgotPasswordPage())
+                          );
                         },
                         child: Text("Forgot Password?", style: TextStyle(fontSize: 15, color: Colors.blue),)
                       )
