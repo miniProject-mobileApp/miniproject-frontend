@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/auth/forgot_password/verify_email.dart';
 import 'package:frontend/screens/auth/login_page.dart';
 
 class ChangePasswordPage extends StatelessWidget{
