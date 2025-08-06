@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/auth/forgot_password_page.dart';
+import 'package:frontend/screens/auth/forgot_password/forgot_password_page.dart';
+import 'package:frontend/screens/auth/forgot_password/verify_email.dart';
+import 'package:frontend/screens/auth/login_page.dart';
 import 'package:frontend/screens/auth/signUpPage.dart';
 import 'package:frontend/screens/home/basePage.dart';
 import 'package:frontend/screens/home/chatBot.dart';
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primaryColor: Colors.blue),
-      home: ForgotPasswordPage()
+      home: LoginPage()
     );
   }
 }
