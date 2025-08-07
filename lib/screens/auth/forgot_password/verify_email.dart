@@ -1,10 +1,128 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend/screens/auth/forgot_password/change_password_page.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:http/http.dart' as http;
 
-class VerifyEmailPage extends StatelessWidget{
-  const VerifyEmailPage ({super.key});
+class VerifyEmailPage extends StatefulWidget{
+  final String email;
+  const VerifyEmailPage ({super.key, required this.email});
+
+  @override
+  State<VerifyEmailPage> createState() => _VerifyEmailPageState();
+}
+
+class _VerifyEmailPageState extends State<VerifyEmailPage> {
+  final _codeController = TextEditingController();
+  bool _isLoading = false; 
+  bool _isResending = false; // for resending the email
+
+  final String _verifyCodeUrl = 'http://192.168.186.69:7000/api/v1/auth/verify'; 
+  final String _resendCodeUrl = 'http://192.168.186.69:7000/api/v1/auth/forgotPassword'; 
+
+  //function for resending
+  Future <void> _verifyCodeFunction() async{
+    final code = _codeController.text.trim();
+
+    if(code.length != 5 || !RegExp(r'^\d{5}$').hasMatch(code)){
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Please provide a five digit code"), backgroundColor: Colors.red,)
+      );
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final response = await http.post(
+        Uri.parse(_verifyCodeUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'email': widget.email,
+          'forgotPasswordCode': code
+        })
+      ).timeout(const Duration(seconds: 10), onTimeout: (){
+        throw Exception('Request timed out');
+      });
+
+      final responseData = jsonDecode(response.body);
+
+      if(response.statusCode == 200){
+        Navigator.push(
+          context, 
+          MaterialPageRoute(
+            builder: (context) => ChangePasswordPage(email: widget.email)
+          )
+        );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(responseData['message'] ?? 'Code verified'))
+        );
+      }else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(responseData['error'] ?? 'Failed to verify code'))
+        );
+      }
+
+    } catch (e) {
+      print('Error: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Error verifying code"),backgroundColor: Colors.red,)
+      );
+    }finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  // function to resend the 
+  Future<void> _resendCode() async{
+    setState(() {
+      _isResending = true;
+    });
+
+    try {
+      final response = await http.post(
+        Uri.parse(_resendCodeUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'email': widget.email})
+      ).timeout(const Duration(seconds: 10), onTimeout: (){
+        throw Exception('Request timed out');
+      });
+
+      final responseData = jsonDecode(response.body);
+
+      if(response.statusCode == 200){
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(responseData['message'] ?? 'code resent successfully'))
+        );
+      }else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(responseData['error'] ?? 'Failed to resend code'), backgroundColor: Colors.red,)
+        );
+      }
+    } catch (e) {
+      print("Error caused by $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Internal server error'), backgroundColor: Colors.red,)
+      );
+    }finally{
+      setState(() {
+        _isResending = false;
+      });
+    }
+  }
+
+  @override
+  void dispose(){
+    _codeController.dispose();
+    super.dispose();
+  }
+
 
 
   @override
@@ -72,6 +190,7 @@ class VerifyEmailPage extends StatelessWidget{
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 18, ),
                   child: PinCodeTextField(
+                    controller: _codeController,
                     appContext: context, 
                     length: 5,
                     cursorHeight: 20,
@@ -100,10 +219,8 @@ class VerifyEmailPage extends StatelessWidget{
               ),
           
               GestureDetector(
-                onTap: (){
-                  print("Code resent");
-                },
-                child: Text("Resend Code", style: TextStyle(fontSize: 17, color: Colors.blue),)
+                onTap: _isResending ? null : _resendCode,
+                child: Text(_isResending ? "Resending...": 'Resend code', style: TextStyle(fontSize: 17, color: Colors.blue),)
               ),
 
               SizedBox(height: 20,),
@@ -115,19 +232,16 @@ class VerifyEmailPage extends StatelessWidget{
                   height: 50,
                   child: ElevatedButton(
                   
-                    onPressed: (){
-                      Navigator.push(
-                        context, 
-                        MaterialPageRoute(builder: (context) => ChangePasswordPage())
-                      );
-                      // print("Password changed");
-                    }, 
+                    onPressed: _isLoading ? null: _verifyCodeFunction,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue.shade300,
                       foregroundColor: Colors.white
                     ),
-                    child: Text("Verify", style: TextStyle(fontSize: 18),)),
-                ),
+                    child: _isLoading 
+                      ? const CircularProgressIndicator(color: Colors.white)
+                      : const Text("Verify", style: TextStyle(fontSize: 18),)
+                  ),
+                )
               )
           
             ],
@@ -136,7 +250,6 @@ class VerifyEmailPage extends StatelessWidget{
       ),
     );
   }
-
 }
 
 
