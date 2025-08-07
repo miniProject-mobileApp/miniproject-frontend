@@ -4,6 +4,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:frontend/providers/auth_provider.dart';
+import 'package:frontend/screens/auth/login_page.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget{
   const HomeScreen({super.key});
@@ -11,8 +14,23 @@ class HomeScreen extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-
+    final authProvider = Provider.of<AuthProvider>(context);
     double screenWidth = MediaQuery.of(context).size.width;
+
+    //redirect to login page if not authenticated
+    if(!authProvider.isAuthenticated){
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacement(
+          context, 
+          MaterialPageRoute(builder: (context) => LoginPage())
+        );
+      });
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(color: Colors.blue,),
+        )
+      );
+    } 
 
     // TODO: implement build
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -52,7 +70,11 @@ class HomeScreen extends StatelessWidget{
                               children: [
                                 Padding(
                                   padding: EdgeInsets.only(top: 20),
-                                  child: Text("Welcome back, psam sap", style: TextStyle(fontSize: 16, color: Colors.blue, fontWeight: FontWeight.bold),)
+                                  child: Text(
+                                    authProvider.userName != null
+                                      ? "Welcome back, ${authProvider.userName}" 
+                                      : "Loading...", 
+                                    style: TextStyle(fontSize: 16, color: Colors.blue, fontWeight: FontWeight.bold),)
                                 ),
                                 Padding(
                                   padding: EdgeInsets.only(top: 2),
@@ -140,7 +162,10 @@ class HomeScreen extends StatelessWidget{
                                 borderRadius: BorderRadius.circular(12),
                                 color: Colors.blue
                               ),
-                              child: Center(child: Text("7 days", style: TextStyle(color: Colors.white),)),
+                              child: Center(child: Text(authProvider.userStreak != null 
+                                ? "${authProvider.userStreak} days"
+                                : "Loading...",
+                              style: TextStyle(color: Colors.white),)),
                             )
                           ],
                         ),
@@ -151,7 +176,10 @@ class HomeScreen extends StatelessWidget{
                       Row(
                         children: [
                           SizedBox(width: 10,),
-                          Text("7", style: TextStyle(fontSize: 50, color: Colors.white),),
+                          Text(authProvider.userStreak != null 
+                            ? "${authProvider.userStreak}"
+                            : "Loading...", 
+                          style: TextStyle(fontSize: 50, color: Colors.white),),
                           SizedBox(width: 20,),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
