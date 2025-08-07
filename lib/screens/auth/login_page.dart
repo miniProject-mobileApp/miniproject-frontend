@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:frontend/providers/auth_provider.dart';
 import 'package:frontend/screens/auth/forgot_password/forgot_password_page.dart';
 import 'package:frontend/screens/auth/signUpPage.dart';
-import 'package:frontend/screens/home/basePage.dart';
-// import 'package:frontend/screens/oldLoginPage.dart';
-import 'package:frontend/services/login_service.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget{
   const LoginPage({super.key});
@@ -19,14 +18,36 @@ class _LoginPageState extends State<LoginPage> {
   //text controllers for text fields
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-
-  final LoginService _loginService = LoginService();
-
-  //loading states 
-  bool _isLoading = false;
   String? _errorMessage;
+  bool _isLoading = false;
 
+  // final LoginService _loginService = LoginService();
 
+  Future<void> _login() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    await authProvider.login(_emailController.text.trim(), _passwordController.text.trim());
+
+    setState(() {
+      _isLoading = false;
+    });
+
+    if(authProvider.error != null){
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(authProvider.error!), backgroundColor: Colors.red,)
+      );
+    }else if(authProvider.isAuthenticated) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Login successful'))
+      );
+    }
+  
+  }
+
+  
   @override
   void dispose(){
     _emailController.dispose();
@@ -34,48 +55,6 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  //login button logic
-  Future<void> _handleLogin() async {
-    setState(() {
-      _isLoading = true;
-      _errorMessage = null;
-    });
-
-    //validation
-    final email = _emailController.text.trim();
-    final password = _passwordController.text.trim();
-
-    if(email.isEmpty || password.isEmpty){
-      setState(() {
-        _isLoading = false;
-        _errorMessage = 'Please fill all fields';
-      });
-      return;
-    }
-
-    try {
-      final response = await _loginService.login(
-        email: email, 
-        password: password
-      );
-
-      //navigate to base screen if successful
-      if(mounted){
-        Navigator.pushReplacement(
-          context, 
-          MaterialPageRoute(builder: (context) => const BaseScreen())
-        );
-      }
-    } catch (e) {
-        setState(() {
-          _errorMessage = e.toString();
-        });
-      }finally{
-        setState(() {
-          _isLoading = false;
-        });
-      }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -251,7 +230,7 @@ class _LoginPageState extends State<LoginPage> {
                   width: screenWidth * 0.7,
                   height: 50,
                   child: ElevatedButton(
-                    onPressed: _isLoading ? null : _handleLogin, 
+                    onPressed: _isLoading ? null : _login, 
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                       overlayColor: Colors.transparent.withValues(alpha: 0.2) // gives the opacity vibe when clicked on
