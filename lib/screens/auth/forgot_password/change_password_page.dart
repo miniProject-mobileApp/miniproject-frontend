@@ -1,8 +1,89 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/auth/login_page.dart';
+import 'package:http/http.dart' as http;
 
-class ChangePasswordPage extends StatelessWidget{
-  const ChangePasswordPage ({super.key});
+
+class ChangePasswordPage extends StatefulWidget{
+  //taking email as a parameter
+  final String email;
+  const ChangePasswordPage ({super.key, required this.email});
+
+  @override
+  State<ChangePasswordPage> createState() => _ChangePasswordPageState();
+}
+
+class _ChangePasswordPageState extends State<ChangePasswordPage> {
+  final _newPasswordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+  bool _isLoading = false;
+
+  final String _backendUrl = 'http://192.168.186.69:7000/api/v1/auth/updatePassword';
+
+  //function to update the password
+  Future<void> _setNewPassword() async {
+    final newPassword = _newPasswordController.text.trim();
+    final confirmPassword = _confirmPasswordController.text.trim();
+
+    if(newPassword.isEmpty || confirmPassword.isEmpty){
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Please enter all fields"))
+      );
+      return;
+    }
+    
+    if(newPassword != confirmPassword){
+       ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Passwords do not match"))
+      );
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+    });
+
+
+    try {
+      final response = await http.post(
+        Uri.parse(_backendUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'email': widget.email,
+          'newPassword': newPassword,
+          'confirmNewPassword': confirmPassword
+        })
+      );
+
+      final responseData = jsonDecode(response.body);
+      if(response.statusCode == 200){
+        Navigator.push(
+          context, 
+          MaterialPageRoute(
+            builder: (context) => LoginPage()
+          )
+        );
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(responseData['message'] ?? 'Password updated'))
+        );
+      }else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(responseData['error'] ?? 'Password unable to update'), backgroundColor: Colors.red,)
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error connecting to server'), backgroundColor: Colors.red,)
+      );
+    }finally {
+      setState(() {
+      _isLoading = false;
+      });
+    }
+
+
+  }
 
 
   @override
@@ -91,6 +172,7 @@ class ChangePasswordPage extends StatelessWidget{
                           
                     ),
                     child: TextField(
+                      controller: _newPasswordController,
                       cursorColor: Colors.blue,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 16),
@@ -123,6 +205,7 @@ class ChangePasswordPage extends StatelessWidget{
                           
                     ),
                     child: TextField(
+                      controller: _confirmPasswordController,
                       cursorColor: Colors.blue,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 16),
@@ -151,20 +234,19 @@ class ChangePasswordPage extends StatelessWidget{
                   height: 50,
                   child: ElevatedButton(
                   
-                    onPressed: (){
-                      Navigator.push(
-                        context, 
-                        MaterialPageRoute(builder: (context) => LoginPage())
-                      );
-                      // print("Password changed");
-                    }, 
+                    onPressed: _isLoading ? null : _setNewPassword,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue.shade300,
                       foregroundColor: Colors.white
                     ),
-                    child: Text("Change password", style: TextStyle(fontSize: 18),)),
-                ),
-              )
+                    child: _isLoading 
+                          ? CircularProgressIndicator(color: Colors.white,)
+                          : Text("Change Password")
+                  ),
+                )
+              ),
+
+              SizedBox(height: 30,)
           
             ],
           ),
