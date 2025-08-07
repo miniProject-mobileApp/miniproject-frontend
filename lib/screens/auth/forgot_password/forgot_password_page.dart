@@ -1,9 +1,76 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/auth/forgot_password/verify_email.dart';
+import 'package:http/http.dart' as http;
 
-class ForgotPasswordPage extends StatelessWidget{
+class ForgotPasswordPage extends StatefulWidget{
   const ForgotPasswordPage ({super.key});
 
+  @override
+  State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
+}
+
+class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
+  final _emailController = TextEditingController();
+  // set _loading to track the progress of the request
+  // set to false when the request hasn't yet started and set to true when started
+  bool _isLoading = false;
+
+  final String _backendUrl = 'http://192.168.186.69:7000/api/v1/auth/forgotPassword';
+
+  //function to send email to the backend
+  Future<void> _sendForgotPasswordCode() async{
+    final email = _emailController.text.trim();
+
+    if(email.isEmpty ||!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Please enter a valid email address"))
+      );
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      final response = await http.post(
+        Uri.parse(_backendUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'email': email})
+      );
+
+      final responseData = jsonDecode(response.body);
+
+      if(response.statusCode == 200){
+        Navigator.push(
+          context, 
+          MaterialPageRoute(
+            builder: (context) => VerifyEmailPage(email:email)
+          )
+        );
+        ScaffoldMessenger.of(context).showSnackBar(
+          // shows the message from the backend
+          // takes the message field from the response object
+          SnackBar(content: Text(responseData['message'] ?? "Forgot password code sent"))
+        );
+      }else {
+        // show error message from backend
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(responseData['error'] ?? 'Forgot password code not sent'), backgroundColor: Colors.red,), 
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error connecting to server'), backgroundColor: Colors.red,)
+      );
+    }finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +158,7 @@ class ForgotPasswordPage extends StatelessWidget{
                           
                     ),
                     child: TextField(
+                      controller: _emailController,
                       cursorColor: Colors.blue,
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 16),
@@ -116,19 +184,15 @@ class ForgotPasswordPage extends StatelessWidget{
                   width: screenWidth * 0.7,
                   height: 50,
                   child: ElevatedButton(
-                  
-                    onPressed: (){
-                      Navigator.push(
-                        context, 
-                        MaterialPageRoute(builder: (context) => VerifyEmailPage())
-                      );
-                      // print("Password changed");
-                    }, 
+
+                    onPressed: _isLoading ? null : _sendForgotPasswordCode,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue.shade300,
                       foregroundColor: Colors.white
                     ),
-                    child: Text("Send code", style: TextStyle(fontSize: 18),)),
+                    child: _isLoading 
+                        ? CircularProgressIndicator(color: Colors.white)
+                        :Text("Send code", style: TextStyle(fontSize: 18),)),
                 ),
               )
           
