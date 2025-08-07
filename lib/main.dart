@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/auth/forgot_password/forgot_password_page.dart';
-import 'package:frontend/screens/auth/forgot_password/verify_email.dart';
+import 'package:frontend/providers/auth_provider.dart';
 import 'package:frontend/screens/auth/login_page.dart';
-import 'package:frontend/screens/auth/signUpPage.dart';
 import 'package:frontend/screens/home/basePage.dart';
-import 'package:frontend/screens/home/chatBot.dart';
-// import 'package:frontend/screens/home/basePage.dart';
-import 'package:frontend/screens/quiz/investment/question_one.dart';
-// import 'package:frontend/screens/quiz/investment/results.dart';
-
-// import 'package:frontend/screens/individualLessons/tradingBasics.dart';
+import 'package:provider/provider.dart';
+import 'package:frontend/utils/auth_storage.dart';
 
 
-void main(){
-  runApp(const MyApp());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await AuthStorage.deleteToken();
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => AuthProvider()..checkAuthStatus(),
+      child: const MyApp(),
+     ),
+    
+  );
 }
 
 class MyApp extends StatelessWidget{
@@ -26,7 +28,11 @@ class MyApp extends StatelessWidget{
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primaryColor: Colors.blue),
-      home: LoginPage()
+      home: Consumer<AuthProvider>(
+        builder: (context, auth, _) {
+          return auth.isAuthenticated ? const BaseScreen() : const LoginPage();
+        }
+      )
     );
   }
 }
