@@ -4,7 +4,6 @@ import 'package:frontend/screens/home/homePage.dart';
 import 'package:frontend/screens/home/lessonPage.dart';
 import 'package:frontend/screens/home/chatBot.dart';
 import 'package:frontend/screens/home/profilePage.dart';
-import 'package:frontend/screens/home/statsPage.dart';
 
 class BaseScreen extends StatefulWidget{
   const BaseScreen({super.key});
@@ -21,7 +20,7 @@ class _BaseScreenState extends State<BaseScreen> {
     HomeScreen(),
     LessonScreen(),
     Chatbot(),
-    StatsScreen(),
+    // StatsScreen(),
     ProfileScreen()
   ];
 
@@ -52,7 +51,7 @@ class _BaseScreenState extends State<BaseScreen> {
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "home"),
             BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.personChalkboard), label: "Lessons"),
             BottomNavigationBarItem(icon: Icon(Icons.message), label: "Chat"),
-            BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: "Stats"),
+            // BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: "Stats"),
             BottomNavigationBarItem(icon: FaIcon(FontAwesomeIcons.circleUser), label: "Profile"),
           ]),
       ),
