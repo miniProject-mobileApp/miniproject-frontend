@@ -29,7 +29,7 @@ class OngoingCourse extends StatelessWidget{
                   Future.delayed(const Duration(milliseconds: 200), () { // delays the navigation to show the ripple effect
                     Navigator.push(
                     context, 
-                    MaterialPageRoute(builder: (context) => CryptoScreen())
+                    MaterialPageRoute(builder: (context) => InvestmentIntro())
                   );
                   });
 
