@@ -101,7 +101,7 @@ class _InvestMentQuizQuestionOneState extends State<InvestMentQuizQuestionOne> {
           _selectedIndex = selectedAnswers[currentQuestionIndex];
         }else {
           submitQuiz().then((result) {
-            Navigator.push(
+            Navigator.pushReplacement(
             context, 
             MaterialPageRoute(
               builder: (context) => InvestmentQuizResultScreen(
