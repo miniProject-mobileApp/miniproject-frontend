@@ -1,7 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+// import 'package:frontend/screens/courseDetails/Investment/Investment_intro.dart';
+import 'package:frontend/screens/home/basePage.dart';
 import 'package:frontend/screens/home/chatBot.dart';
 import 'package:percent_indicator/flutter_percent_indicator.dart';
 import 'package:http/http.dart' as http;
@@ -351,7 +352,27 @@ class _InvestmentQuizResultScreenState extends State<InvestmentQuizResultScreen>
                     ),
                   );
                 }).toList(),
-                SizedBox(height: 20,)
+                SizedBox(height: 20,),
+
+                SizedBox(
+                  width: screenWidth * 0.4,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white
+                    ),
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => BaseScreen())
+                      );
+                    }, 
+                    child: Text("Done")
+                  ),
+                ),
+                SizedBox(height: 30,)
+                
+  
             ],
           ),
         )
