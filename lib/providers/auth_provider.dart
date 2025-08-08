@@ -10,6 +10,9 @@ class AuthProvider with ChangeNotifier {
   String? _token;
   bool _isAuthenticated = false;
   String? _userName;
+  String? _lastName;
+  String? _email;
+  String? _phoneNumber;
   int? _userStreak;
   String? _error;
 
@@ -17,6 +20,9 @@ class AuthProvider with ChangeNotifier {
   String? get token => _token;
   bool get isAuthenticated => _isAuthenticated;
   String? get userName => _userName;
+  String? get lastName => _lastName;
+  String? get email => _email;
+  String? get phoneNumber => _phoneNumber;
   int? get userStreak => _userStreak;
   String? get error => _error;
 
@@ -53,6 +59,9 @@ class AuthProvider with ChangeNotifier {
 
         //user data from login
         _userName = responseData['user']?['firstName'] ?? "Unknown user";
+        _lastName = responseData['user']?['lastName'] ?? 'last';
+        _email = responseData['user']?['email'] ?? 'example@gmail.com';
+        _phoneNumber = responseData['user']?['phone'] ?? 'none';
 
         _isAuthenticated = true;
         _error = null;
@@ -83,6 +92,9 @@ class AuthProvider with ChangeNotifier {
       if(response.statusCode == 200){
         final responseData = jsonDecode(response.body);
         _userName = responseData['firstName'] ?? 'Unknown user';
+        _lastName = responseData['lastName'] ?? 'last';
+        _email = responseData['email'] ?? 'example@gmail.com';
+        _phoneNumber = responseData['phone'] ?? 'none';
         _error = null;
       }else {
         _error = jsonDecode(response.body)['error'] ?? 'Failed to get user data';
