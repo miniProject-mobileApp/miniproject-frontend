@@ -6,12 +6,17 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/providers/auth_provider.dart';
 import 'package:frontend/screens/auth/login_page.dart';
+import 'package:frontend/screens/home/lessonPage.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget{
+class HomeScreen extends StatefulWidget{
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
 
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
@@ -36,7 +41,9 @@ class HomeScreen extends StatelessWidget{
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(statusBarColor: Colors.blue[100]),
       child: Scaffold(
+        backgroundColor: Colors.grey.shade100,
         body: SingleChildScrollView(
+
           child: Column(
               children: [
                 // header section
@@ -107,25 +114,7 @@ class HomeScreen extends StatelessWidget{
                 ),
 
 
-                //Total Balance
-                SizedBox(height: 25,),
-
-                Padding(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Current balance", style: TextStyle(fontSize: 12, color: Colors.blue),),
-                          Text("GHC 450,000", style: TextStyle(fontSize: 16, color: Colors.blue, fontWeight: FontWeight.bold ),)
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-
+                SizedBox(height: 10,),      
                // Streak section
                Padding(
                 padding: EdgeInsetsGeometry.symmetric(horizontal: 16, vertical: 20),
@@ -179,7 +168,7 @@ class HomeScreen extends StatelessWidget{
                           Text(authProvider.userStreak != null 
                             ? "${authProvider.userStreak}"
                             : "Loading...", 
-                          style: TextStyle(fontSize: 50, color: Colors.white),),
+                              style: TextStyle(fontSize:authProvider.userStreak != null ? 50: 20, color: Colors.white),),
                           SizedBox(width: 20,),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -195,230 +184,198 @@ class HomeScreen extends StatelessWidget{
                 ),
               ),
 
-                SizedBox(height: 15,),
+                SizedBox(height: 50,),
+
+                // horizontal scrollable
+                Container(
+                  width: screenWidth * 0.9,
+                  height: screenWidth * 0.4,
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 1, color: Colors.transparent),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16)
+                  ),
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        // continue your lesson
+                        child: GestureDetector(
+                          onTap: (){
+                            print("Last lesson page");
+                          },
+                          child: Container(
+                            width: screenWidth * 0.4,
+                            height: screenWidth * 0.35,
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 225, 237, 247),
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(color: Colors.blue)
+                            ),
+                            child:  Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(left: 12),
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(width: 1, color: Colors.transparent),
+                                    borderRadius: BorderRadius.circular(20)
+                                  ),
+                                  child: Center(child: Image.asset('assets/images/book.png', width: 20, height: 20,)),
+                                ),
+                                SizedBox(
+                                  width: screenWidth * 0.38,
+                                  child: Text('Continue your lesson to maintain your streak 🔥', textAlign: TextAlign.center,),
+                                )
+                          
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 12,),
+                      //No idea yet
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            print("Some action to perform");
+                          },
+                          child: Container(
+                            width: screenWidth * 0.4,
+                            height: screenWidth * 0.35,
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 225, 237, 247),
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(color: Colors.blue)
+                            ),
+                            child:  Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(left: 12),
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(width: 1, color: Colors.transparent),
+                                    borderRadius: BorderRadius.circular(20)
+                                  ),
+                                  child: Center(child: Image.asset('assets/images/trending.png', width: 20, height: 20,)),
+                                ),
+                                SizedBox(
+                                  width: screenWidth * 0.38,
+                                  child: Text('Continue your lesson to maintain your streak 🔥', textAlign: TextAlign.center,),
+                                )
+                          
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 12,),
+                      GestureDetector(
+                        onTap: (){
+                          print('Feedback sent');
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            width: screenWidth * 0.4,
+                            height: screenWidth * 0.35,
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 225, 237, 247),
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(color: Colors.blue)
+                            ),
+                            child:  Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(left: 12),
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border: Border.all(width: 1, color: Colors.transparent),
+                                    borderRadius: BorderRadius.circular(20)
+                                  ),
+                                  child: Center(child: Image.asset('assets/images/feedback.png', width: 20, height: 20,)),
+                                ),
+                                SizedBox(
+                                  width: screenWidth * 0.38,
+                                  child: Text('Provide feedback, your feedback helps us grow', textAlign: TextAlign.center,),
+                                )
+                        
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 12,),
+                    ],
+                  ),
+                ),
+
+                // blue container beneath the screen
+                SizedBox(height: 50),
 
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          children: [
-                            //continue lesson
-                            Container(
-                              width: 180,
-                              height: 130,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 225, 237, 247),
-                                borderRadius: BorderRadius.circular(16),
-                                border: Border.all(color: Colors.blue)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      
-                                      children: [
-                                        Text("Lessons done", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),),
-                                        SizedBox(width: 10,),
-                                        Container(
-                                          width: 40,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(color: Colors.blue, width: 1),
-                                            color: Colors.white
-                                          ),
-                                          child: Center(child: Image.asset('assets/images/book.png', width: 20, height: 20,)),
-                                        ),
-
-                                      ],
-                                    ),
-                                    Text("12/24", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.grey), ),
-                                    SizedBox(
-                                      width: 150,
-                                      child: LinearProgressIndicator(
-                                        value: 0.1,
-                                        backgroundColor: Colors.blue[200],
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: Colors.blue,
-                                        minHeight: 8,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            //play games
-                            Container(
-                              width: 180,
-                              height: 130,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 225, 237, 247),
-                                borderRadius: BorderRadius.circular(16),
-                                border: Border.all(color: Colors.blue)
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      width: 40,
-                                      height: 49,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(color: Colors.blue, width: 1),
-                                        color: Colors.white
-                                      ),
-                                      child: Center(child: Image.asset("assets/images/controller.png", width: 20, height: 20,),),
-                                    ),
-                                    Text("Play games"),
-                                    Text("Fun study games", style: TextStyle(color: Colors.grey[500]),)
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            //see what is trending
-                            Container(
-                              width: 180,
-                              height: 130,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 225, 237, 247),
-                                borderRadius: BorderRadius.circular(16),
-                                border: Border.all(color: Colors.blue)
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text("Continue reading", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),),
-                                        SizedBox(width: 5,),
-                                        Container(
-                                          width: 40,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(color: Colors.blue, width: 1),
-                                            color: Colors.white
-                                          ),
-                                          child: Center(child: Image.asset('assets/images/trending.png', width: 20, height: 20,),),
-                                        ),
-                                      ],
-                                    ),
-                                    Text("Top stories now",style: TextStyle(color: Colors.grey[500]),),
-                                    SizedBox(
-                                      width: 150,
-                                      child: LinearProgressIndicator(
-                                        value: 0.1,
-                                        backgroundColor: Colors.blue[200],
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: Colors.blue,
-                                        minHeight: 8,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 10),
-                            // feedback section
-                            Container(
-                              width: 180,
-                              height: 130,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 225, 237, 247),
-                                borderRadius: BorderRadius.circular(16),
-                                border: Border.all(color: Colors.blue)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text("Give Feedback", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),),
-                                        SizedBox(width: 20,),
-                                        Container(
-                                          width: 40,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Colors.white,
-                                            border: Border.all(color: Colors.blue, width: 1)
-                                          ),
-                                          child: Center(child: Image.asset('assets/images/feedback.png', width: 20, height: 20,),),
-                                        ),
-                                      ],
-                                    ),
-                                    Text("Tell us more", style: TextStyle(color: Colors.black),),
-                                    Text("Help us grow", style: TextStyle(color: Colors.grey)),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  // blue container beneath the screen
-                  SizedBox(height: 10,),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context, 
+                        MaterialPageRoute(builder: (context) => LessonScreen())
+                      );
+                    },
                     child: Container(
                       width: screenWidth * 0.9,
-                      height: 90,
+                      height: screenWidth * 0.5,
                       decoration: BoxDecoration(
-                        color: Colors.blue,
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/Student.jpeg',),
+                          fit: BoxFit.cover
+                        ),
                         borderRadius: BorderRadius.circular(15)
                       ),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(top: 10,left: 10),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text("Continue learning ", style: TextStyle(color: Colors.white),),
-                                SizedBox(width: 140,),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 10),
-                                  child: Container(
-                                    width: 80,
-                                    height: 25,
-                                    decoration: BoxDecoration(
-                                      color: const Color.fromARGB(255, 225, 237, 247),
-                                      borderRadius: BorderRadius.circular(12)
-                                    ),
-                                    child: Center(child: Text("continue", style: TextStyle(color: Colors.blue),)),
-                                  ),
-                                )
+                                Text("Continue learning ", style: TextStyle(color: Colors.white, fontSize: 18),),
+                
                               ],
                             ),
                           ),
 
-                          SizedBox(height: 10,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(left: 10),
+                                width: screenWidth * 0.4,
+                                child: Text('Understand basics of savings', style: TextStyle(fontSize: 15,color: Colors.white,), textAlign: TextAlign.left,),
+                              ),
+                            ],
+                          ),
 
+                          
+                    
                           //play icon
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+                            padding: const EdgeInsets.symmetric(horizontal: 16,),
                             child: Row(
                               children: [
                                 Container(
@@ -430,7 +387,7 @@ class HomeScreen extends StatelessWidget{
                                   ),
                                   child: Icon(Icons.play_arrow, color: Colors.blue,),
                                 ),
-
+                    
                                 SizedBox(width: 10,),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -453,10 +410,11 @@ class HomeScreen extends StatelessWidget{
                             ),
                           )
                         ],
-
+                    
                       ),
                     ),
-                  )
+                  ),
+                )
 
               ],
             ),
