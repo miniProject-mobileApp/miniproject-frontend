@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:frontend/screens/courseDetails/Investment/Investment_lesson_two.dart';
-import 'package:frontend/screens/individualLessons/tradingBasics.dart';
+import 'package:frontend/screens/courseDetails/Investment/individualLessons/tradingBasics.dart';
+import 'package:frontend/screens/courseDetails/Investment/individualLessons/tradingBasicsThree.dart';
+import 'package:frontend/screens/courseDetails/Investment/individualLessons/tradingBasicsTwo.dart';
 
-class CryptoScreen extends StatelessWidget{
-  const CryptoScreen({super.key});
+class InvestmentIntro extends StatelessWidget{
+  const InvestmentIntro({super.key});
 
 
   @override
@@ -145,7 +146,7 @@ class CryptoScreen extends StatelessWidget{
                     Padding(
                       padding: const EdgeInsets.only(left: 30),
                       child: Container(
-                        height: 50,
+                        height: 30,
                         decoration: BoxDecoration(
                           border: Border(
                             left: BorderSide(color: Colors.grey, width: 2),
@@ -160,7 +161,7 @@ class CryptoScreen extends StatelessWidget{
                            Future.delayed(Duration(milliseconds: 200), () {
                             Navigator.push(
                               context, 
-                              MaterialPageRoute(builder: (context) => InvestmentLessonTwoScreen())
+                              MaterialPageRoute(builder: (context) => TradingBasicsTwoScreen())
                             );
                           });
                         },
@@ -180,10 +181,10 @@ class CryptoScreen extends StatelessWidget{
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text("Invest lesson 2", style: TextStyle(fontSize: 16),),
-                                  Text("Begin trading basics ", style: TextStyle(fontSize: 12, color: Colors.grey), ),
+                                  Text("Continue trading basics ", style: TextStyle(fontSize: 12, color: Colors.grey), ),
                                 ],
                               ),
-                              SizedBox(width: 88),
+                              SizedBox(width: 70),
                               Icon(Icons.arrow_forward_ios_outlined)
                             ],
                           ),
@@ -193,7 +194,7 @@ class CryptoScreen extends StatelessWidget{
                     Padding(
                       padding: const EdgeInsets.only(left: 30),
                       child: Container(
-                        height: 50,
+                        height: 30,
                         decoration: BoxDecoration(
                           border: Border(
                             left: BorderSide(color: Colors.grey, width: 2),
@@ -203,7 +204,12 @@ class CryptoScreen extends StatelessWidget{
                     ),
                     InkWell(
                       onTap: () {
-                        print("third pressed");
+                        Future.delayed(Duration(milliseconds: 200), () {
+                            Navigator.push(
+                              context, 
+                              MaterialPageRoute(builder: (context) => TradingBasicsThreeScreen())
+                            );
+                        });
                       },
                       splashColor: const Color.fromARGB(255, 159, 206, 245),
                       borderRadius: BorderRadius.circular(15),
@@ -217,93 +223,11 @@ class CryptoScreen extends StatelessWidget{
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Lesson three", style: TextStyle(fontSize: 16),),
+                                Text("Invest lesson 3", style: TextStyle(fontSize: 16),),
                                 Text("Delve into lesson three ", style: TextStyle(fontSize: 12, color: Colors.grey), ),
                               ],
                             ),
                             SizedBox(width: 78),
-                            Icon(Icons.arrow_forward_ios_outlined)
-                          ],
-                        ),
-                      ),
-                    ),
-                    //vertical line
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          border: Border(
-                            left: BorderSide(color: Colors.grey, width: 2),
-                          )
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        print("fourth tapped");
-                      },
-                      splashColor:const Color.fromARGB(255, 159, 206, 245),
-                      borderRadius: BorderRadius.circular(15),
-                      child: Ink(
-                        padding: EdgeInsets.symmetric(vertical: 5),
-                        decoration: BoxDecoration(
-                          color: Colors.transparent
-                        ),
-                        child: Row(
-                          children: [
-                            SizedBox(width: 18,),
-                            FaIcon(FontAwesomeIcons.rectangleList, size: 25,),
-                            SizedBox(width: 60),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Lesson four", style: TextStyle(fontSize: 16),),
-                                Text("Delve into lesson four", style: TextStyle(fontSize: 12, color: Colors.grey), ),
-                              ],
-                            ),
-                            SizedBox(width: 88,),
-                            Icon(Icons.arrow_forward_ios_outlined)
-                          ],
-                        ),
-                      ),
-                    ),
-                    //vertical line
-                    Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          border: Border(
-                            left: BorderSide(color: Colors.grey, width: 2),
-                          )
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        print("fifth tapped");
-                      },
-                      splashColor: const Color.fromARGB(255, 159, 206, 245),
-                      borderRadius: BorderRadius.circular(15),
-                      child: Ink(
-                        padding: EdgeInsets.symmetric(vertical: 5),
-                        decoration: BoxDecoration(
-                          color: Colors.transparent,
-                        ),
-                        child: Row(
-                          children: [
-                            SizedBox(width: 18,),
-                            FaIcon(FontAwesomeIcons.rectangleList, size: 25,),
-                            SizedBox(width: 60),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Lesson five", style: TextStyle(fontSize: 16),),
-                                Text("Delve into lesson five ", style: TextStyle(fontSize: 12, color: Colors.grey), ),
-                              ],
-                            ),
-                            SizedBox(width: 88,),
                             Icon(Icons.arrow_forward_ios_outlined)
                           ],
                         ),
