@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:frontend/providers/auth_provider.dart';
 import 'package:frontend/screens/auth/forgot_password/forgot_password_page.dart';
 import 'package:frontend/screens/auth/signUpPage.dart';
+import 'package:frontend/screens/home/basePage.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget{
@@ -43,8 +44,12 @@ class _LoginPageState extends State<LoginPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Login successful'))
       );
-    }
-  
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const BaseScreen()),
+      );
+    } 
   }
 
   
