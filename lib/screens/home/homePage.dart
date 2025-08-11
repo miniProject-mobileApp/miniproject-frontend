@@ -6,6 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:frontend/providers/auth_provider.dart';
 import 'package:frontend/screens/auth/login_page.dart';
+import 'package:frontend/screens/courseDetails/Investment/Investment_intro.dart';
+import 'package:frontend/screens/courseDetails/stocks/stocks_intro.dart';
+import 'package:frontend/screens/courseDetails/savings/savings_intro.dart';
 import 'package:frontend/screens/home/lessonPage.dart';
 import 'package:provider/provider.dart';
 
@@ -184,7 +187,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
-                SizedBox(height: 50,),
+                SizedBox(height: 20,),
+
+                Padding(
+                  padding: EdgeInsetsGeometry.only(left: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text("Lessons", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.blue),),
+                    ],
+                  ),
+                ),
+
+                SizedBox(height: 20,),
 
                 // horizontal scrollable
                 Container(
@@ -203,37 +218,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         // continue your lesson
                         child: GestureDetector(
                           onTap: (){
-                            print("Last lesson page");
+                            Navigator.push(
+                              context, 
+                              MaterialPageRoute(builder: (context) => InvestmentIntro())
+                            );
                           },
                           child: Container(
                             width: screenWidth * 0.4,
                             height: screenWidth * 0.35,
                             decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 225, 237, 247),
+                              image: DecorationImage(
+                                image: AssetImage('assets/images/investment.jpeg'),
+                                fit: BoxFit.cover
+                              ),
                               borderRadius: BorderRadius.circular(16),
                               border: Border.all(color: Colors.blue)
-                            ),
-                            child:  Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(left: 12),
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    border: Border.all(width: 1, color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(20)
-                                  ),
-                                  child: Center(child: Image.asset('assets/images/book.png', width: 20, height: 20,)),
-                                ),
-                                SizedBox(
-                                  width: screenWidth * 0.38,
-                                  child: Text('Continue your lesson to maintain your streak 🔥', textAlign: TextAlign.center,),
-                                )
-                          
-                              ],
                             ),
                           ),
                         ),
@@ -244,45 +243,33 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.all(8.0),
                         child: GestureDetector(
                           onTap: () {
-                            print("Some action to perform");
+                            Navigator.push(
+                              context, 
+                              MaterialPageRoute(builder: (context) => SavingsIntro())
+                            );
                           },
                           child: Container(
                             width: screenWidth * 0.4,
                             height: screenWidth * 0.35,
                             decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 225, 237, 247),
+                              image: DecorationImage(
+                                image: AssetImage('assets/images/savings3.jpeg'),
+                                fit: BoxFit.cover  
+                              ),
                               borderRadius: BorderRadius.circular(16),
                               border: Border.all(color: Colors.blue)
                             ),
-                            child:  Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(left: 12),
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    border: Border.all(width: 1, color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(20)
-                                  ),
-                                  child: Center(child: Image.asset('assets/images/trending.png', width: 20, height: 20,)),
-                                ),
-                                SizedBox(
-                                  width: screenWidth * 0.38,
-                                  child: Text('Continue your lesson to maintain your streak 🔥', textAlign: TextAlign.center,),
-                                )
-                          
-                              ],
-                            ),
+                            
                           ),
                         ),
                       ),
                       SizedBox(width: 12,),
                       GestureDetector(
                         onTap: (){
-                          print('Feedback sent');
+                           Navigator.push(
+                              context, 
+                              MaterialPageRoute(builder: (context) => StocksIntro())
+                            );
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -290,32 +277,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: screenWidth * 0.4,
                             height: screenWidth * 0.35,
                             decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 225, 237, 247),
+                              image: DecorationImage(
+                                image: AssetImage('assets/images/stocksImage.jpeg'),
+                                fit: BoxFit.cover
+                              ),
                               borderRadius: BorderRadius.circular(16),
                               border: Border.all(color: Colors.blue)
                             ),
-                            child:  Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(left: 12),
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    border: Border.all(width: 1, color: Colors.transparent),
-                                    borderRadius: BorderRadius.circular(20)
-                                  ),
-                                  child: Center(child: Image.asset('assets/images/feedback.png', width: 20, height: 20,)),
-                                ),
-                                SizedBox(
-                                  width: screenWidth * 0.38,
-                                  child: Text('Provide feedback, your feedback helps us grow', textAlign: TextAlign.center,),
-                                )
-                        
-                              ],
+                            child: Center(
+                              child: Text("Stocks", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
                             ),
+                            
                           ),
                         ),
                       ),

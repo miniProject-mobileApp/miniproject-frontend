@@ -50,6 +50,7 @@ dependencies:
   pin_code_fields: ^8.0.1
   flutter_secure_storage: ^9.2.4
   provider: ^6.1.5
+  flutter_web_auth_2: ^4.1.0
 
 
 dev_dependencies:
@@ -78,6 +79,8 @@ flutter:
   assets:
     - assets/images/
     - assets/videos/InvestvidCompressed.mp4
+    - assets/videos/InvestTwoComp.mp4
+    - assets/videos/InvestThreeComp.mp4
     - .env
     
 

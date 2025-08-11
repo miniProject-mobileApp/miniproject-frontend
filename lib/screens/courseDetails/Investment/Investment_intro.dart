@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:frontend/screens/courseDetails/Investment/individualLessons/tradingBasics.dart';
-import 'package:frontend/screens/courseDetails/Investment/individualLessons/tradingBasicsThree.dart';
-import 'package:frontend/screens/courseDetails/Investment/individualLessons/tradingBasicsTwo.dart';
+import 'package:frontend/screens/courseDetails/Investment/Lessons/invest_lesson_one.dart';
+import 'package:frontend/screens/courseDetails/Investment/Lessons/invest_lesson_three.dart';
+import 'package:frontend/screens/courseDetails/Investment/Lessons/invest_lesson_two.dart';
 
 class InvestmentIntro extends StatelessWidget{
   const InvestmentIntro({super.key});
@@ -111,7 +111,7 @@ class InvestmentIntro extends StatelessWidget{
                           Future.delayed(Duration(milliseconds: 200), () {
                             Navigator.push(
                             context, 
-                            MaterialPageRoute(builder: (context) => TradingBasicsScreen())
+                            MaterialPageRoute(builder: (context) => InvestLessonOne())
                             );
                           });
                           
@@ -161,7 +161,7 @@ class InvestmentIntro extends StatelessWidget{
                            Future.delayed(Duration(milliseconds: 200), () {
                             Navigator.push(
                               context, 
-                              MaterialPageRoute(builder: (context) => TradingBasicsTwoScreen())
+                              MaterialPageRoute(builder: (context) => InvestLessonTwo())
                             );
                           });
                         },
@@ -207,7 +207,7 @@ class InvestmentIntro extends StatelessWidget{
                         Future.delayed(Duration(milliseconds: 200), () {
                             Navigator.push(
                               context, 
-                              MaterialPageRoute(builder: (context) => TradingBasicsThreeScreen())
+                              MaterialPageRoute(builder: (context) => InvestLessonThree())
                             );
                         });
                       },

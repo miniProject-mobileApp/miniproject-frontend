@@ -97,7 +97,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
         });
         return;
       }
-    
 
       try {
         final response = await _signUpService.signUp(

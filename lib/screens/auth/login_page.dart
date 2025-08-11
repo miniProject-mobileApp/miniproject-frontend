@@ -246,48 +246,44 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
 
-                //OR
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20,horizontal: 16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SizedBox(child: Container(height: 1, width: 150,color: Colors.blue,),),
-                      Text('OR', style: TextStyle(color: Colors.blue, fontSize: 14),),
-                      SizedBox(child: Container(height: 1, width: 150,color: Colors.blue,),),
-                    ],
-                  ),
-                ),
+                // //OR
+                // Padding(
+                //   padding: EdgeInsets.symmetric(vertical: 20,horizontal: 16),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //     children: [
+                //       SizedBox(child: Container(height: 1, width: 150,color: Colors.blue,),),
+                //       Text('OR', style: TextStyle(color: Colors.blue, fontSize: 14),),
+                //       SizedBox(child: Container(height: 1, width: 150,color: Colors.blue,),),
+                //     ],
+                //   ),
+                // ),
 
                 //sign in with google
-                Material(
-                  color: Colors.blue[100],
-                  borderRadius: BorderRadius.circular(35),
-                  child: InkWell(
-                    onTap: (){
-                      Future.delayed(const Duration(milliseconds: 300), () {
-                        print("Login in with google");
-                      });
-                    },
-                    splashColor: Colors.blue[200],
-                    borderRadius: BorderRadius.circular(35),
-                    child: Ink(
-                      width: screenWidth * 0.7,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        border: BoxBorder.all(width: 1, color: Colors.blue),
-                        borderRadius: BorderRadius.circular(35)
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text("Login in with google", style: TextStyle(color: Colors.blue),),
-                          Image.asset('assets/images/google.png')
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                // Material(
+                //   color: Colors.blue[100],
+                //   borderRadius: BorderRadius.circular(35),
+                //   child: InkWell(
+                //     onTap: _isLoading ? null : _googleLogin,
+                //     splashColor: Colors.blue[200],
+                //     borderRadius: BorderRadius.circular(35),
+                //     child: Ink(
+                //       width: screenWidth * 0.7,
+                //       height: 50,
+                //       decoration: BoxDecoration(
+                //         border: BoxBorder.all(width: 1, color: Colors.blue),
+                //         borderRadius: BorderRadius.circular(35)
+                //       ),
+                //       child: Row(
+                //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //         children: [
+                //           Text("Login in with google", style: TextStyle(color: Colors.blue),),
+                //           Image.asset('assets/images/google.png')
+                //         ],
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 SizedBox(height: 20,)
               ],
             ),

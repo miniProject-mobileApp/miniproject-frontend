@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/courseDetails/blockChain.dart';
+import 'package:frontend/screens/courseDetails/stocks/stocks_intro.dart';
 import 'package:frontend/screens/courseDetails/Investment/Investment_intro.dart';
-import 'package:frontend/screens/courseDetails/forex.dart';
+import 'package:frontend/screens/courseDetails/savings/savings_intro.dart';
 
 class OngoingCourse extends StatelessWidget{
   const OngoingCourse({super.key});
@@ -108,7 +108,7 @@ class OngoingCourse extends StatelessWidget{
             ),
           ),
 
-          // forex
+          // Savings
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
             child: Material(
@@ -119,7 +119,7 @@ class OngoingCourse extends StatelessWidget{
                   Future.delayed(const Duration(milliseconds: 200), () {
                     Navigator.push(
                       context, 
-                      MaterialPageRoute(builder: (context) => ForexScreen())
+                      MaterialPageRoute(builder: (context) => SavingsIntro())
                     );
                   });
                 },
@@ -201,7 +201,7 @@ class OngoingCourse extends StatelessWidget{
                   Future.delayed(const Duration(milliseconds: 200), (){
                     Navigator.push(
                       context, 
-                      MaterialPageRoute(builder: (context) => BlockchainScreen())
+                      MaterialPageRoute(builder: (context) => StocksIntro())
                     );
                   });
                 },
