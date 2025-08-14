@@ -22,7 +22,7 @@ class _SavingsLessonOneState extends State<SavingsLessonOne> {
   void initState(){
     super.initState();
       // initializing the controller with the video
-    _controller = VideoPlayerController.asset('assets/videos/InvestvidCompressed.mp4');
+    _controller = VideoPlayerController.asset('assets/videos/SevenprinciplesofinvestingComp.mp4');
 
     // initialize the video player
     _initializeVideoPlayerFuture = _controller.initialize().then((_) {
@@ -82,7 +82,7 @@ class _SavingsLessonOneState extends State<SavingsLessonOne> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text("Basics of Savings"),
+        title: Text("7 Investing principles"),
         centerTitle: true,
         iconTheme:const IconThemeData(color: Colors.blue),
         automaticallyImplyLeading: true,

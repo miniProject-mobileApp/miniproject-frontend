@@ -81,6 +81,10 @@ flutter:
     - assets/videos/InvestvidCompressed.mp4
     - assets/videos/InvestTwoComp.mp4
     - assets/videos/InvestThreeComp.mp4
+    - assets/videos/SevenprinciplesofinvestingComp.mp4
+    - assets/videos/CompoudinterestComp.mp4
+    - assets/videos/FinanceOneComp.mp4
+    - assets/videos/InvestbasicsbondsComp.mp4
     - .env
     
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/providers/auth_provider.dart';
 import 'package:frontend/screens/auth/login_page.dart';
 import 'package:frontend/screens/home/basePage.dart';
+import 'package:frontend/screens/onboardingScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:frontend/utils/auth_storage.dart';
 
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget{
       theme: ThemeData(primaryColor: Colors.blue),
       home: Consumer<AuthProvider>(
         builder: (context, auth, _) {
-          return auth.isAuthenticated ? const BaseScreen() : const LoginPage();
+          return auth.isAuthenticated ? const BaseScreen() : const OnboardingScreen();
         }
       )
     );

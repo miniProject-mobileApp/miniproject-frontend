@@ -50,6 +50,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             border: Border.all(width: 1, color: Colors.white),
                             color: Colors.grey[350]
                           ),
+                          child: Center(
+                            child: Icon(Icons.person_2, size: 100,),
+                          ),
                         ),
           
                         //blue background

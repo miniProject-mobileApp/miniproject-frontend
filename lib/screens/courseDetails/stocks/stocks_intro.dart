@@ -15,7 +15,7 @@ class StocksIntro extends StatelessWidget{
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text("Introduction to Stocks", style: TextStyle(fontWeight: FontWeight.bold),),
+        title: Text("Intro to Stocks & Bonds", style: TextStyle(fontWeight: FontWeight.bold),),
         backgroundColor: Colors.grey[200],
         centerTitle: true,
         iconTheme: IconThemeData(color: Colors.blue, ),
@@ -131,7 +131,7 @@ class StocksIntro extends StatelessWidget{
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Stocks basics", style: TextStyle(fontSize: 16),),
+                                  Text("Bonds basics", style: TextStyle(fontSize: 16),),
                                   Text("Start with the fundamentals", style: TextStyle(fontSize: 12, color: Colors.grey), ),
                                 ],
                               ),

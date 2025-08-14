@@ -73,7 +73,7 @@ class OnboardingScreen extends StatelessWidget{
 
         //page 3
         PageViewModel(
-          title: "Stay up to date",
+          title: "Learn more",
           body: "With our news feature, stay up to date on all news trends",
           image: Container(
             margin: EdgeInsets.only(

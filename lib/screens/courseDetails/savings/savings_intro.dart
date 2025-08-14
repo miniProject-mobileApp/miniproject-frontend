@@ -15,7 +15,7 @@ class SavingsIntro extends StatelessWidget{
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text("Introduction to Savings", style: TextStyle(fontWeight: FontWeight.bold),),
+        title: Text("More on Investment", style: TextStyle(fontWeight: FontWeight.bold),),
         backgroundColor: Colors.grey[200],
         centerTitle: true,
         iconTheme: IconThemeData(color: Colors.blue, ),
@@ -131,7 +131,7 @@ class SavingsIntro extends StatelessWidget{
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Savings basics", style: TextStyle(fontSize: 16),),
+                                  Text("Principles of Investing", style: TextStyle(fontSize: 16),),
                                   Text("Start with the fundamentals", style: TextStyle(fontSize: 12, color: Colors.grey), ),
                                 ],
                               ),
@@ -180,11 +180,11 @@ class SavingsIntro extends StatelessWidget{
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Savings lesson 2", style: TextStyle(fontSize: 16),),
-                                  Text("Continue saving basics ", style: TextStyle(fontSize: 12, color: Colors.grey), ),
+                                  Text("Compound Interest", style: TextStyle(fontSize: 16),),
+                                  Text("Continue savings basics ", style: TextStyle(fontSize: 12, color: Colors.grey), ),
                                 ],
                               ),
-                              SizedBox(width: 74),
+                              SizedBox(width: 64),
                               Icon(Icons.arrow_forward_ios_outlined)
                             ],
                           ),
@@ -223,11 +223,11 @@ class SavingsIntro extends StatelessWidget{
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Savings lesson 3", style: TextStyle(fontSize: 16),),
+                                Text("Finance Management", style: TextStyle(fontSize: 16),),
                                 Text("Delve into lesson three ", style: TextStyle(fontSize: 12, color: Colors.grey), ),
                               ],
                             ),
-                            SizedBox(width: 78),
+                            SizedBox(width: 45),
                             Icon(Icons.arrow_forward_ios_outlined)
                           ],
                         ),

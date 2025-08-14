@@ -253,7 +253,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             height: screenWidth * 0.35,
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage('assets/images/savings3.jpeg'),
+                                image: AssetImage('assets/images/person.jpeg'),
                                 fit: BoxFit.cover  
                               ),
                               borderRadius: BorderRadius.circular(16),
@@ -285,7 +285,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               border: Border.all(color: Colors.blue)
                             ),
                             child: Center(
-                              child: Text("Stocks", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),),
+                              child: Text("Stocks & Bonds", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),),
                             ),
                             
                           ),
