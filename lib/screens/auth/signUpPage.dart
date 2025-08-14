@@ -376,42 +376,42 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 // lines for "or"]
                 SizedBox(height: 20,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(child: Container(height: 1, width: 150,color: Colors.blue,)),
-                    Text("OR", style: TextStyle(color: Colors.blue, fontSize: 14),),
-                    SizedBox(child: Container(height: 1, width: 150,color: Colors.blue,))
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //   children: [
+                //     SizedBox(child: Container(height: 1, width: 150,color: Colors.blue,)),
+                //     Text("OR", style: TextStyle(color: Colors.blue, fontSize: 14),),
+                //     SizedBox(child: Container(height: 1, width: 150,color: Colors.blue,))
+                //   ],
+                // ),
 
-                // sign up with google
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: SizedBox(
-                    width: screenWidth * 0.7,
-                    height: 50,
-                    child: OutlinedButton(
-                      onPressed: (){
-                        Navigator.push(
-                          context, 
-                          MaterialPageRoute(builder: (context) => BaseScreen())
-                        );
-                      },
-                      style: OutlinedButton.styleFrom(
-                        backgroundColor: Colors.transparent,
-                        side: BorderSide(color: Colors.blue)
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text("Sign up with Google", style: TextStyle(color: Colors.blue, fontSize: 16), ),
-                          Image.asset("assets/images/google.png")
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                // // sign up with google
+                // Padding(
+                //   padding: const EdgeInsets.only(top: 20),
+                //   child: SizedBox(
+                //     width: screenWidth * 0.7,
+                //     height: 50,
+                //     child: OutlinedButton(
+                //       onPressed: (){
+                //         Navigator.push(
+                //           context, 
+                //           MaterialPageRoute(builder: (context) => BaseScreen())
+                //         );
+                //       },
+                //       style: OutlinedButton.styleFrom(
+                //         backgroundColor: Colors.transparent,
+                //         side: BorderSide(color: Colors.blue)
+                //       ),
+                //       child: Row(
+                //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //         children: [
+                //           Text("Sign up with Google", style: TextStyle(color: Colors.blue, fontSize: 16), ),
+                //           Image.asset("assets/images/google.png")
+                //         ],
+                //       ),
+                //     ),
+                //   ),
+                // ),
 
                 //already have an account
                 SizedBox(height: 10,),
