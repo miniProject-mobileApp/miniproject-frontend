@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:frontend/screens/quiz/investment/question_one.dart';
 import 'package:frontend/screens/quiz/investment/question_three.dart';
 import 'package:video_player/video_player.dart';
 
